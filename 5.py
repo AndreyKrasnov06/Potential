@@ -21,11 +21,8 @@ monster_hash = []
 with open('monster_game.csv', newline='', encoding="UTF-8") as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
-        print(row["opportunity"])
         monster_hash.append(
             [row["MonsterName"] + row["opportunity"] + row["probability"], generate_hash(row["opportunity"])])
-
-print(monster_hash)
 
 """Вывод данных"""
 with open('hash_table.csv', 'w', newline='', encoding='utf8') as file:
@@ -34,3 +31,12 @@ with open('hash_table.csv', 'w', newline='', encoding='utf8') as file:
     w.writeheader()
     for row in monster_hash:
         w.writerow({'key': row[0], 'value': row[1]})
+
+with open('hash_table.csv', newline='', encoding="UTF-8") as csvfile:
+    reader = csv.DictReader(csvfile)
+    count = 0
+    for row in reader:
+        count += 1
+        if count > 10:
+            break
+        print(f"{row["key"]} - {row["value"]}")
